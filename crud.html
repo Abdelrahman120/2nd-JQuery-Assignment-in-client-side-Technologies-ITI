@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<title>CRUD</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+		<!-- <script type="text/javascript" src="js/crud.js"></script> -->
+	
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">lec41@mcitegypt.onmicrosoft.com</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">19900.0000000000</mso:Order>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">lec41@mcitegypt.onmicrosoft.com</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ContentTypeId msdt:dt="string">0x0101</mso:ContentTypeId>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+	<body>
+		<h3>Add New Person</h3>
+		<label>Name</label>
+		<input type="text" id="name" name="name"/>
+		<br><br>
+		<label>Age</label>
+		<input type="text" id="age" name="age"/>
+		<br><br>
+		<button id="add">Add new Person</button>
+		<br>
+		<hr>
+		<h3>Persons List</h3>
+		<input type="text" placeholder="search" id="search-item"/>
+		<button id="search">search</button>
+		<br><br>
+		<table id="persons-list" border="1" cellpadding="25">
+			<thead>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Delete</th>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<script>
+			$(document).ready(function(){
+				$("#add").on("click", function(){
+					var nam=$("#name").val();
+					var age=$("#age").val();
+					$("tbody").append(
+						"<tr>"+
+                        "<td>"+nam+"</td>"+
+                        "<td>"+age+"</td>"+
+                        "<td><button class='delete'>Delete</button></td>"+
+                        "</tr>"
+					)
+					$("#name").val("")
+					$("#age").val("")
+					$(".delete").click(function(){
+						$(this).parent().parent().remove();
+					});
+				});
+
+				$("#search").click(function () {
+					$("tbody tr").each(function (i) {
+						var search = $("#search-item").val().toLowerCase();
+						var name = $(this).find("td:first").text().toLowerCase();
+						var age = $(this).find("td:nth-child(2)").text();
+						if (name.includes(search) || age.includes(search)) {
+							$(this).show();
+						} else {
+							$(this).hide();
+						}
+					});
+					if (search === '') {
+						$("tbody tr").show();
+					}
+				});
+				
+			});
+		</script>
+	</body>	
+</html>

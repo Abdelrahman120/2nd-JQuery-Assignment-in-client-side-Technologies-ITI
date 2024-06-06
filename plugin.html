@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugin</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+        }
+        p{
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>HELLO PLUGIN</p>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $.fn.redbackground=function(){
+                $(this).css("background-color","red")
+            }
+            $("div").redbackground();
+        });
+    </script>
+</body>
+</html>
